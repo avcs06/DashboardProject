@@ -1,0 +1,33 @@
+{
+  "questions": [],
+  "known": [
+    {
+      "rule": "REVIEW",
+      "severity": "mandatory",
+      "message": "S04 offers to open the dashboard edited last even when the member has no dashboards, with no empty first-visit alternative. Fix: Add an alternative 'when the member has no dashboards yet' that reads that there is no last-edited dashboard yet and points to Create in the frame instead of offering to open the dashboard they edited last. (addressed in the final fix, not re-reviewed)",
+      "at": "S04.alternatives",
+      "stage": "design-architect"
+    },
+    {
+      "rule": "REVIEW",
+      "severity": "mandatory",
+      "message": "openedFrom includes FR02, which is a frame, not a screen that opens the dialog. Fix: Remove FR02 so openedFrom lists only S05, the screen with a step that opens D01 (addressed in the final fix, not re-reviewed)",
+      "at": "D01.openedFrom",
+      "stage": "design-architect"
+    },
+    {
+      "rule": "REVIEW",
+      "severity": "mandatory",
+      "message": "The Delete way out does not say where it leads: it never says it closes the dialog or goes to a route. Fix: Change the Delete step to say it closes the dialog, such as: Can choose Delete, which removes the widget, saves automatically, closes the dialog and shows the dashboard without the widget. (addressed in the final fix, not re-reviewed)",
+      "at": "D02.steps",
+      "stage": "design-architect"
+    },
+    {
+      "rule": "REVIEW",
+      "severity": "mandatory",
+      "message": "The step merges two different actions into one by asking for Note text plus Counter label and Counter number together though a widget is only one type. Fix: Replace S03 with type-specific steps, such as one step that edits only Note text (FD07) for a note widget and another step that edits only Counter label (FD08) and Counter number (FD09) for a counter widget, each saving automatically and updating the dashboard last edited time. (addressed in the final fix, not re-reviewed)",
+      "at": "F12.S03",
+      "stage": "flows-expand-3"
+    }
+  ]
+}

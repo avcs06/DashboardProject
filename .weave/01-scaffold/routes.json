@@ -1,0 +1,32 @@
+[
+  {
+    "id": "S01",
+    "title": "Your day, all in one dashboard",
+    "route": "/",
+    "folder": "web/app/(routes)/(marketing)"
+  },
+  {
+    "id": "S02",
+    "title": "Create your account",
+    "route": "/sign-up",
+    "folder": "web/app/(routes)/(marketing)/sign-up"
+  },
+  {
+    "id": "S03",
+    "title": "Sign in",
+    "route": "/sign-in",
+    "folder": "web/app/(routes)/(marketing)/sign-in"
+  },
+  {
+    "id": "S04",
+    "title": "Your dashboards",
+    "route": "/dashboards",
+    "folder": "web/app/(routes)/(app)/dashboards"
+  },
+  {
+    "id": "S05",
+    "title": "The dashboard's name",
+    "route": "/dashboards/[dashboardId]",
+    "folder": "web/app/(routes)/(app)/dashboards/[dashboardId]"
+  }
+]

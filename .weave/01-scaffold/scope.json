@@ -1,0 +1,188 @@
+{
+  "app": {
+    "name": "Dashboard Builder",
+    "summary": "Dashboard Builder is for individuals who want a personal dashboard that gathers the small things they track every day in one place. A user creates a dashboard, lands directly in its editor, and adds note, counter, checklist and link list widgets that they configure, arrange and resize. All changes save automatically, and the user's dashboard list shows every dashboard with when it was last edited.",
+    "audience": "Individuals who want one personal place for their own notes, counters, checklists and useful links."
+  },
+  "domains": [
+    "editor"
+  ],
+  "roles": [
+    {
+      "id": "member",
+      "name": "Member",
+      "description": "A person who signs up to build and keep their own personal dashboards; they own every dashboard, widget, checklist item and link they create and are the only one who can see or edit them.",
+      "signedIn": true
+    }
+  ],
+  "vocabulary": [
+    {
+      "noun": "Dashboard",
+      "description": "One personal dashboard: a name, when it was last edited, and the widgets it contains in their order. A member can rename, duplicate and delete their dashboards.",
+      "belongsTo": "member"
+    },
+    {
+      "noun": "Widget",
+      "description": "One block on a dashboard with a title, a size of small, medium or large, a position relative to the other widgets, and a type of note, counter, checklist or link list with the settings and content for that type.",
+      "belongsTo": "member"
+    },
+    {
+      "noun": "ChecklistItem",
+      "description": "One item inside a checklist widget: its text and whether it is ticked off. Items can be added, ticked, unticked, edited and removed.",
+      "belongsTo": "member"
+    },
+    {
+      "noun": "Link",
+      "description": "One entry inside a link list widget: a title and a web address. Links can be added, edited, removed and opened.",
+      "belongsTo": "member"
+    }
+  ],
+  "inScope": [
+    "A public landing page that says the app is for building personal dashboards of notes, counters, checklists and links, and invites the visitor to sign up or sign in and click Create to start.",
+    "Users sign up and sign in; a signed-in user sees only their own dashboards, and no one else can view or edit them. There are no shared dashboards.",
+    "A dashboard list showing all of the user's dashboards with the name and last edited time of each, with Create to start a new one; clicking a dashboard opens it in the editor.",
+    "Creating a dashboard lands the user directly in its editor; a new dashboard starts empty apart from its name and a prompt to add a first widget.",
+    "Dashboards have a name and can be renamed, duplicated and deleted from the list or the editor; deleting a dashboard deletes its widgets with it.",
+    "The editor saves every change automatically as it is made, with no manual save step, and updates the dashboard's last edited time.",
+    "Adding widgets of four types to a dashboard: a note widget holding plain text; a counter widget holding a number with a label that the user can increase or decrease; a checklist widget holding items the user can add to and tick off; and a link list widget holding links made of a title and a web address.",
+    "Configuring each widget after adding it: giving it a title, and the settings and content for its type — the note's text, the counter's label and number, the checklist's items and which are ticked, and the link list's links.",
+    "Renaming a widget by changing its title, changing a widget's position relative to the other widgets, resizing a widget between small, medium and large only, and removing a widget from the dashboard.",
+    "The whole app uses the dark, screen-like, glowing futuristic look the idea describes — neon light on controls, edges and numbers, computer type for figures and a faint grid behind the widgets — while every widget stays easy to read and use."
+  ],
+  "outOfScope": [
+    {
+      "item": "Sharing a dashboard with other people, or several people editing one dashboard together",
+      "reason": "The idea is about personal dashboards owned by one user and never mentions sharing or collaboration.",
+      "placeholder": "Every dashboard stays private to the user who created it; the app offers no share or invite action."
+    },
+    {
+      "item": "Publishing a dashboard as a public page for visitors",
+      "reason": "The idea implies no audience for a dashboard beyond its owner.",
+      "placeholder": "Dashboards are only visible to their signed-in owner in the dashboard list and editor; only the landing page is public."
+    },
+    {
+      "item": "Widget types beyond note, counter, checklist and link list",
+      "reason": "The idea names exactly four widget types; more types would dilute the one editing loop the MVP must do well.",
+      "placeholder": "Users build dashboards from the four named widget types only."
+    },
+    {
+      "item": "Free-form widget placement, custom widget sizes, or dragging widgets to arbitrary screen positions",
+      "reason": "The idea asks only for relative position and three named sizes, and leaves on-screen placement to the design.",
+      "placeholder": "Users change a widget's position relative to the other widgets and pick small, medium or large; where widgets sit on screen is left to the design."
+    },
+    {
+      "item": "Manual saving, save history or restoring earlier versions of a dashboard",
+      "reason": "The idea requires automatic saving and says nothing about versions; history would add a second, competing save model.",
+      "placeholder": "The editor saves automatically and keeps only the current state, with the last edited time shown in the list."
+    },
+    {
+      "item": "A choice of themes or appearance settings",
+      "reason": "The idea prescribes one look; theme options are not needed for the core job.",
+      "placeholder": "The app ships with the single dark, glowing futuristic look described in the idea."
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "A01",
+      "text": "Clicking Create makes a new dashboard with the default name 'Untitled dashboard' and opens it in the editor immediately, with no form to fill in first; the user can rename it in the editor.",
+      "kind": "behavior",
+      "affects": [
+        "Dashboard",
+        "Widget"
+      ]
+    },
+    {
+      "id": "A02",
+      "text": "Adding a widget places it in the editor at once with a default title and workable default settings for its type, so the user sees a result immediately and configures it afterwards rather than having to complete a setup form first.",
+      "kind": "behavior",
+      "affects": [
+        "Widget"
+      ]
+    },
+    {
+      "id": "A03",
+      "text": "Automatic saving persists every dashboard and widget change as it is made, updates the dashboard's last edited time, and the saved state is still there after a refresh or a later sign-in.",
+      "kind": "behavior",
+      "affects": [
+        "Dashboard",
+        "Widget",
+        "ChecklistItem",
+        "Link"
+      ]
+    },
+    {
+      "id": "A04",
+      "text": "Duplicating a dashboard copies all of its widgets with their titles, type settings and content, order and sizes, under the original name plus ' copy'; the copy is a separate dashboard the user can then rename and edit without affecting the original.",
+      "kind": "behavior",
+      "affects": [
+        "Dashboard",
+        "Widget"
+      ]
+    },
+    {
+      "id": "A05",
+      "text": "Deleting a dashboard or removing a widget asks for confirmation and is then permanent, with no trash or undo; deleting a dashboard also deletes all of its widgets and their content.",
+      "kind": "behavior",
+      "affects": [
+        "Dashboard",
+        "Widget"
+      ]
+    },
+    {
+      "id": "A06",
+      "text": "A counter widget starts at 0 with an empty label, and increasing or decreasing changes the number by 1 each time with no set minimum or maximum, so the number may go below zero.",
+      "kind": "data",
+      "affects": [
+        "Widget"
+      ]
+    },
+    {
+      "id": "A07",
+      "text": "Each link in a link list widget needs a title and a web address; a saved link opens its web address, and links can be edited and removed after they are added, as can checklist items.",
+      "kind": "data",
+      "affects": [
+        "Link"
+      ]
+    },
+    {
+      "id": "A08",
+      "text": "A user with no dashboards yet sees an empty dashboard list with a clear Create action, and an empty dashboard in the editor shows how to add a first widget, so neither state is a dead end.",
+      "kind": "behavior",
+      "affects": [
+        "Dashboard"
+      ]
+    },
+    {
+      "id": "A09",
+      "text": "There is one fixed look — the dark, glowing, futuristic interface the idea describes, with neon-lit controls and edges, computer-style type for figures and a faint grid behind the widgets — with no theme choices, and widget text and controls stay easy to read and use within it.",
+      "kind": "presentation",
+      "affects": [
+        "Dashboard",
+        "Widget"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q01",
+      "question": "Can a dashboard ever be shared with, or viewed by, anyone other than the user who created it?",
+      "whyItMatters": "Sharing would change permissions, roles and scope.",
+      "defaultAnswer": "No. Dashboards are private to their owner, with no sharing, inviting or public pages in the MVP.",
+      "blocking": false
+    },
+    {
+      "id": "Q02",
+      "question": "May a counter widget's number go below zero, and is there any largest or smallest value?",
+      "whyItMatters": "A floor or ceiling would change the counter's business rules and what the editor must validate.",
+      "defaultAnswer": "Yes. The counter changes by 1 per increase or decrease with no minimum or maximum, starting from 0.",
+      "blocking": false
+    },
+    {
+      "id": "Q03",
+      "question": "Is deleting a dashboard or removing a widget permanent, or should deleted items be recoverable?",
+      "whyItMatters": "Recoverable deletion would add a trash state, restore flows and extra data retention rules.",
+      "defaultAnswer": "Deletion is permanent after a confirmation step, for both dashboards and widgets, with no trash, undo or restore.",
+      "blocking": false
+    }
+  ]
+}

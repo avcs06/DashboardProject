@@ -1,0 +1,2321 @@
+{
+  "flows": [
+    {
+      "id": "F01",
+      "name": "Visit the landing page",
+      "role": "member",
+      "kind": "landing",
+      "noun": "",
+      "authKind": "none",
+      "signedOut": true,
+      "start": "Off the app",
+      "goal": "Understand the app is for personal dashboards and get started toward signing up or signing in.",
+      "preconditions": [
+        "Not signed in."
+      ],
+      "steps": [
+        {
+          "id": "F01.S01",
+          "kind": "user",
+          "userAction": "The visitor opens the app.",
+          "websiteResponse": "The website shows the public landing page saying the app is for building personal dashboards of notes, counters, checklists and links, with choices to sign up or sign in and to Create to start.",
+          "fields": [],
+          "form": "",
+          "effects": []
+        },
+        {
+          "id": "F01.S02",
+          "kind": "user",
+          "userAction": "The visitor chooses to sign up.",
+          "websiteResponse": "The website shows the sign-up form.",
+          "fields": [],
+          "form": "",
+          "effects": []
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F01.A01",
+          "from": "F01.S02",
+          "kind": "other",
+          "condition": "The visitor chooses to sign in instead of signing up.",
+          "steps": [
+            {
+              "id": "F01.A01.S01",
+              "kind": "user",
+              "userAction": "The visitor chooses to sign in.",
+              "websiteResponse": "The website shows the sign-in form.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        }
+      ],
+      "outcome": "The visitor knows what the app is for and where to sign up or sign in; nothing is saved."
+    },
+    {
+      "id": "F02",
+      "name": "Sign up",
+      "role": "member",
+      "kind": "auth",
+      "noun": "",
+      "authKind": "signUp",
+      "signedOut": true,
+      "start": "On the landing page",
+      "goal": "Create an account to keep private personal dashboards.",
+      "preconditions": [
+        "Not signed in."
+      ],
+      "steps": [
+        {
+          "id": "F02.S01",
+          "kind": "user",
+          "userAction": "The visitor chooses to sign up.",
+          "websiteResponse": "The website shows the sign-up form.",
+          "fields": [],
+          "form": "",
+          "effects": []
+        },
+        {
+          "id": "F02.S02",
+          "kind": "user",
+          "userAction": "The visitor fills in the form and submits it.",
+          "websiteResponse": "The website creates the account, signs the member in and shows their dashboard list ready to Create.",
+          "fields": [],
+          "form": "FM01",
+          "effects": []
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F02.A01",
+          "from": "F02.S02",
+          "kind": "invalid",
+          "condition": "The email is not an address or the password is shorter than 8 characters.",
+          "steps": [
+            {
+              "id": "F02.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website marks what is wrong and keeps what was typed.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F02.S02"
+        },
+        {
+          "id": "F02.A02",
+          "from": "F02.S02",
+          "kind": "failure",
+          "condition": "Creating the account fails.",
+          "steps": [
+            {
+              "id": "F02.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website keeps the entered values and offers to try again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F02.S02"
+        },
+        {
+          "id": "F02.A03",
+          "from": "F02.S02",
+          "kind": "conflict",
+          "condition": "The email already has an account.",
+          "steps": [
+            {
+              "id": "F02.A03.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website says the email already has an account and offers to sign in instead.",
+              "fields": [],
+              "form": ""
+            },
+            {
+              "id": "F02.A03.S02",
+              "kind": "user",
+              "userAction": "The visitor chooses to sign in.",
+              "websiteResponse": "The website shows the sign-in form.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        }
+      ],
+      "outcome": "The member has an account and is signed in; after a refresh they are still signed in on their dashboard list."
+    },
+    {
+      "id": "F03",
+      "name": "Sign in",
+      "role": "member",
+      "kind": "auth",
+      "noun": "",
+      "authKind": "signIn",
+      "signedOut": true,
+      "start": "On the landing page",
+      "goal": "Sign in to reach private dashboards.",
+      "preconditions": [
+        "Has an account.",
+        "Not signed in."
+      ],
+      "steps": [
+        {
+          "id": "F03.S01",
+          "kind": "user",
+          "userAction": "The visitor chooses to sign in.",
+          "websiteResponse": "The website shows the sign-in form.",
+          "fields": [],
+          "form": "",
+          "effects": []
+        },
+        {
+          "id": "F03.S02",
+          "kind": "user",
+          "userAction": "The visitor fills in the form and submits it.",
+          "websiteResponse": "The website signs the member in and shows their dashboard list with only their own dashboards.",
+          "fields": [],
+          "form": "FM01",
+          "effects": []
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F03.A01",
+          "from": "F03.S02",
+          "kind": "invalid",
+          "condition": "The email is not an address or the password is empty.",
+          "steps": [
+            {
+              "id": "F03.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website marks what is wrong and keeps what was typed.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F03.S02"
+        },
+        {
+          "id": "F03.A02",
+          "from": "F03.S02",
+          "kind": "failure",
+          "condition": "Signing in fails for a technical reason.",
+          "steps": [
+            {
+              "id": "F03.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website keeps the entered values and offers to try again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F03.S02"
+        },
+        {
+          "id": "F03.A03",
+          "from": "F03.S02",
+          "kind": "denied",
+          "condition": "The email and password match no account.",
+          "steps": [
+            {
+              "id": "F03.A03.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website says the details do not match an account, keeps the email, and offers to try again or to sign up.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F03.S02"
+        }
+      ],
+      "outcome": "The member is signed in and sees their own dashboards; after a refresh they are still signed in."
+    },
+    {
+      "id": "F04",
+      "name": "Sign out",
+      "role": "member",
+      "kind": "auth",
+      "noun": "",
+      "authKind": "signOut",
+      "signedOut": false,
+      "start": "On the dashboard list or in the editor",
+      "goal": "Leave the app so dashboards stay private on this device.",
+      "preconditions": [
+        "Signed in."
+      ],
+      "steps": [
+        {
+          "id": "F04.S01",
+          "kind": "user",
+          "userAction": "The member chooses to sign out.",
+          "websiteResponse": "The website signs the member out and shows the public landing page with dashboards no longer visible.",
+          "fields": [],
+          "form": "",
+          "effects": []
+        }
+      ],
+      "alternatives": [],
+      "outcome": "The member is signed out; after a refresh they stay signed out on the landing page."
+    },
+    {
+      "id": "F05",
+      "name": "View dashboard list home",
+      "role": "member",
+      "kind": "home",
+      "noun": "",
+      "authKind": "none",
+      "signedOut": false,
+      "start": "After signing in or returning to the app",
+      "goal": "See all dashboards last edited first and open one or start a new one.",
+      "preconditions": [
+        "Signed in."
+      ],
+      "steps": [
+        {
+          "id": "F05.S01",
+          "kind": "user",
+          "userAction": "The member opens their home.",
+          "websiteResponse": "The website shows the dashboard list with every dashboard name and its last edited time ordered most-recently-edited first, with a Create action to start a new dashboard, where each dashboard can be opened in the editor.",
+          "fields": [],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Dashboard",
+              "change": "list"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F05.A01",
+          "from": "F05.S01",
+          "kind": "empty",
+          "condition": "The member has no dashboards yet.",
+          "steps": [
+            {
+              "id": "F05.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website shows an empty dashboard list with a clear Create action to start a first dashboard.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F05.A02",
+          "from": "F05.S01",
+          "kind": "failure",
+          "condition": "Loading the dashboard list fails.",
+          "steps": [
+            {
+              "id": "F05.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website says the list could not be loaded and offers to try again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F05.S01"
+        }
+      ],
+      "outcome": "The member has seen their dashboards with names and last edited times; the list is unchanged and still there after a refresh."
+    },
+    {
+      "id": "F06",
+      "name": "Create a dashboard",
+      "role": "member",
+      "kind": "create",
+      "noun": "Dashboard",
+      "authKind": "none",
+      "signedOut": false,
+      "start": "On the dashboard list or in the editor",
+      "goal": "Start a new empty dashboard and begin editing it right away.",
+      "preconditions": [
+        "Signed in."
+      ],
+      "steps": [
+        {
+          "id": "F06.S01",
+          "kind": "user",
+          "userAction": "The member chooses Create.",
+          "websiteResponse": "The website creates a new dashboard named 'Untitled dashboard', opens it in the editor showing its name and a prompt to add a first widget, saves automatically and updates its last edited time.",
+          "fields": [],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Dashboard",
+              "change": "create"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F06.A01",
+          "from": "F06.S01",
+          "kind": "failure",
+          "condition": "Creating the dashboard fails.",
+          "steps": [
+            {
+              "id": "F06.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website keeps the dashboard list or editor as it was and offers to try Create again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F06.S01"
+        }
+      ],
+      "outcome": "A new empty dashboard exists with its default name and is open in the editor; it is still there after a refresh."
+    },
+    {
+      "id": "F07",
+      "name": "Open dashboard in editor",
+      "role": "member",
+      "kind": "view",
+      "noun": "Dashboard",
+      "authKind": "none",
+      "signedOut": false,
+      "start": "On the dashboard list",
+      "goal": "Open a dashboard to read and use it in the editor.",
+      "preconditions": [
+        "Signed in.",
+        "At least one dashboard exists."
+      ],
+      "steps": [
+        {
+          "id": "F07.S01",
+          "kind": "user",
+          "userAction": "The member opens a dashboard from the dashboard list.",
+          "websiteResponse": "The website shows the dashboard in the editor with its name and all of its widgets in order with their titles, sizes and content.",
+          "fields": [],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Dashboard",
+              "change": "read"
+            },
+            {
+              "noun": "Widget",
+              "change": "list"
+            },
+            {
+              "noun": "ChecklistItem",
+              "change": "list"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F07.A01",
+          "from": "F07.S01",
+          "kind": "empty",
+          "condition": "The dashboard has no widgets yet.",
+          "steps": [
+            {
+              "id": "F07.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website shows the empty dashboard with its name and a prompt to add a first widget.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F07.A02",
+          "from": "F07.S01",
+          "kind": "notFound",
+          "condition": "The dashboard was deleted in the meantime.",
+          "steps": [
+            {
+              "id": "F07.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website says the dashboard is gone and shows the dashboard list.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        }
+      ],
+      "outcome": "The member has seen the dashboard and its widgets; nothing changed and the same state shows after a refresh."
+    },
+    {
+      "id": "F08",
+      "name": "Rename a dashboard",
+      "role": "member",
+      "kind": "edit",
+      "noun": "Dashboard",
+      "authKind": "none",
+      "signedOut": false,
+      "start": "On the dashboard list or in the editor",
+      "goal": "Give a dashboard a meaningful name.",
+      "preconditions": [
+        "Signed in.",
+        "At least one dashboard exists."
+      ],
+      "steps": [
+        {
+          "id": "F08.S01",
+          "kind": "user",
+          "userAction": "The member starts renaming a dashboard on the dashboard list or in the editor.",
+          "websiteResponse": "The website makes the dashboard name editable showing the current name.",
+          "fields": [],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Dashboard",
+              "change": "read"
+            }
+          ]
+        },
+        {
+          "id": "F08.S02",
+          "kind": "user",
+          "userAction": "The member changes the name and confirms it.",
+          "websiteResponse": "The website saves the new name automatically, updates the dashboard's last edited time and shows the new name in the editor and the list.",
+          "fields": [
+            "FD03"
+          ],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Dashboard",
+              "change": "update"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F08.A01",
+          "from": "F08.S02",
+          "kind": "invalid",
+          "condition": "The new name is empty.",
+          "steps": [
+            {
+              "id": "F08.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website marks the name as needing a value and keeps what was typed.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F08.S02"
+        },
+        {
+          "id": "F08.A02",
+          "from": "F08.S02",
+          "kind": "failure",
+          "condition": "Saving the new name fails.",
+          "steps": [
+            {
+              "id": "F08.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website keeps the typed name and offers to try saving again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F08.S02"
+        },
+        {
+          "id": "F08.A03",
+          "from": "F08.S01",
+          "kind": "cancel",
+          "condition": "The member cancels renaming.",
+          "steps": [
+            {
+              "id": "F08.A03.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "Nothing is changed; the website shows the dashboard with its previous name.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F08.A04",
+          "from": "F08.S02",
+          "kind": "notFound",
+          "condition": "The dashboard was deleted in the meantime.",
+          "steps": [
+            {
+              "id": "F08.A04.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website says the dashboard is gone and shows the dashboard list.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F08.A05",
+          "from": "F08.S01",
+          "kind": "notFound",
+          "condition": "The dashboard was deleted in the meantime.",
+          "steps": [
+            {
+              "id": "F08.A05.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website says the dashboard is gone and shows the dashboard list.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        }
+      ],
+      "outcome": "The dashboard has its new name in the list and editor; the new name persists after a refresh."
+    },
+    {
+      "id": "F09",
+      "name": "Delete a dashboard",
+      "role": "member",
+      "kind": "delete",
+      "noun": "Dashboard",
+      "authKind": "none",
+      "signedOut": false,
+      "start": "On the dashboard list or in the editor",
+      "goal": "Permanently delete a dashboard and its widgets.",
+      "preconditions": [
+        "Signed in.",
+        "At least one dashboard exists."
+      ],
+      "steps": [
+        {
+          "id": "F09.S01",
+          "kind": "user",
+          "userAction": "The member chooses Delete on a dashboard on the dashboard list or in the editor.",
+          "websiteResponse": "The website asks the member to confirm permanently deleting the dashboard and all of its widgets.",
+          "fields": [],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Dashboard",
+              "change": "delete"
+            },
+            {
+              "noun": "Widget",
+              "change": "delete"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F09.A01",
+          "from": "F09.S01",
+          "kind": "confirm",
+          "condition": "The member confirmed the permanent deletion.",
+          "steps": [
+            {
+              "id": "F09.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website permanently deletes the dashboard and all of its widgets and shows the dashboard list without it.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F09.A02",
+          "from": "F09.S01",
+          "kind": "cancel",
+          "condition": "The member cancelled.",
+          "steps": [
+            {
+              "id": "F09.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "Nothing is deleted; the website shows the dashboard as it was.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F09.A03",
+          "from": "F09.S01",
+          "kind": "notFound",
+          "condition": "The dashboard was already deleted.",
+          "steps": [
+            {
+              "id": "F09.A03.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website says the dashboard is gone and shows the dashboard list.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F09.A04",
+          "from": "F09.S01",
+          "kind": "failure",
+          "condition": "Deleting the dashboard fails.",
+          "steps": [
+            {
+              "id": "F09.A04.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website keeps the dashboard and offers to try deleting again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F09.S01"
+        }
+      ],
+      "outcome": "The dashboard and its widgets are gone from the list and editor and stay gone after a refresh."
+    },
+    {
+      "id": "F10",
+      "name": "Duplicate a dashboard",
+      "role": "member",
+      "kind": "act",
+      "noun": "Dashboard",
+      "authKind": "none",
+      "signedOut": false,
+      "start": "On the dashboard list or in the editor",
+      "goal": "Start a new dashboard from an existing one.",
+      "preconditions": [
+        "Signed in.",
+        "At least one dashboard exists."
+      ],
+      "steps": [
+        {
+          "id": "F10.S01",
+          "kind": "user",
+          "userAction": "The member chooses Duplicate on a dashboard on the dashboard list or in the editor.",
+          "websiteResponse": "The website creates a separate copy with all widgets, titles, type settings and content, order and sizes under the original name plus ' copy', saves it automatically and shows the copy ready to rename and edit without affecting the original.",
+          "fields": [],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Dashboard",
+              "change": "create"
+            },
+            {
+              "noun": "Widget",
+              "change": "create"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F10.A01",
+          "from": "F10.S01",
+          "kind": "failure",
+          "condition": "Duplicating the dashboard fails.",
+          "steps": [
+            {
+              "id": "F10.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website keeps the original dashboard unchanged and offers to try duplicating again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F10.S01"
+        },
+        {
+          "id": "F10.A02",
+          "from": "F10.S01",
+          "kind": "notFound",
+          "condition": "The dashboard was deleted in the meantime.",
+          "steps": [
+            {
+              "id": "F10.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website says the dashboard is gone and shows the dashboard list.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        }
+      ],
+      "outcome": "A separate copy exists alongside the original and persists after a refresh."
+    },
+    {
+      "id": "F11",
+      "name": "Add a widget",
+      "role": "member",
+      "kind": "create",
+      "noun": "Widget",
+      "authKind": "none",
+      "signedOut": false,
+      "start": "In the editor",
+      "goal": "Add a note, counter, checklist or link list widget to the dashboard.",
+      "preconditions": [
+        "Signed in.",
+        "A dashboard is open in the editor."
+      ],
+      "steps": [
+        {
+          "id": "F11.S01",
+          "kind": "user",
+          "userAction": "The member chooses to add a widget.",
+          "websiteResponse": "The website shows the widget type choices note, counter, checklist and link list.",
+          "fields": [],
+          "form": "",
+          "effects": []
+        },
+        {
+          "id": "F11.S02",
+          "kind": "user",
+          "userAction": "The member picks a widget type and confirms the addition.",
+          "websiteResponse": "The website adds a widget of the chosen type with a default title and default settings, shows it with the other widgets, saves automatically and updates the dashboard last edited time.",
+          "fields": [
+            "FD04"
+          ],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Widget",
+              "change": "create"
+            },
+            {
+              "noun": "Dashboard",
+              "change": "update"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F11.A01",
+          "from": "F11.S02",
+          "kind": "failure",
+          "condition": "Saving the new widget fails.",
+          "steps": [
+            {
+              "id": "F11.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website keeps the chosen type and offers to try again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F11.S02"
+        },
+        {
+          "id": "F11.A02",
+          "from": "F11.S01",
+          "kind": "cancel",
+          "condition": "The member backs out before picking a type.",
+          "steps": [
+            {
+              "id": "F11.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "Nothing is added; the website shows the dashboard as it was.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        }
+      ],
+      "outcome": "A new widget of the chosen type is on the dashboard and persists after a refresh."
+    },
+    {
+      "id": "F12",
+      "name": "Configure widget content and title",
+      "role": "member",
+      "kind": "edit",
+      "noun": "Widget",
+      "authKind": "none",
+      "signedOut": false,
+      "start": "In the editor",
+      "goal": "Set a widget's title and its type content and settings.",
+      "preconditions": [
+        "Signed in.",
+        "The dashboard has at least one widget."
+      ],
+      "steps": [
+        {
+          "id": "F12.S01",
+          "kind": "user",
+          "userAction": "The member chooses a widget to configure.",
+          "websiteResponse": "The website shows the widget title field and, for a note widget the note text, for a counter widget the label and number, for a checklist widget the title with its items, and for a link list widget the title with its links, ready to edit.",
+          "fields": [],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Widget",
+              "change": "read"
+            }
+          ]
+        },
+        {
+          "id": "F12.S02",
+          "kind": "user",
+          "userAction": "The member edits the widget title and confirms.",
+          "websiteResponse": "The website shows the widget with the new title, saves automatically and updates the dashboard last edited time.",
+          "fields": [
+            "FD05"
+          ],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Widget",
+              "change": "update"
+            },
+            {
+              "noun": "Dashboard",
+              "change": "update"
+            }
+          ]
+        },
+        {
+          "id": "F12.S03",
+          "kind": "user",
+          "userAction": "For a note widget, the member edits the note text and confirms.",
+          "websiteResponse": "The website shows the note widget with its new text, saves automatically and updates the dashboard last edited time.",
+          "fields": [
+            "FD07"
+          ],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Widget",
+              "change": "update"
+            },
+            {
+              "noun": "Dashboard",
+              "change": "update"
+            }
+          ]
+        },
+        {
+          "id": "F12.S04",
+          "kind": "user",
+          "userAction": "For a counter widget, the member edits the label and number and confirms.",
+          "websiteResponse": "The website shows the counter widget with its new label and number, saves automatically and updates the dashboard last edited time.",
+          "fields": [
+            "FD08",
+            "FD09"
+          ],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Widget",
+              "change": "update"
+            },
+            {
+              "noun": "Dashboard",
+              "change": "update"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F12.A01",
+          "from": "F12.S01",
+          "kind": "notFound",
+          "condition": "The widget was deleted in the meantime.",
+          "steps": [
+            {
+              "id": "F12.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website says the widget is gone and shows the dashboard without it.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F12.A02",
+          "from": "F12.S02",
+          "kind": "invalid",
+          "condition": "The widget title is empty.",
+          "steps": [
+            {
+              "id": "F12.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website marks the title field and keeps what was typed.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F12.S02"
+        },
+        {
+          "id": "F12.A03",
+          "from": "F12.S02",
+          "kind": "failure",
+          "condition": "Saving the new title fails.",
+          "steps": [
+            {
+              "id": "F12.A03.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website keeps the typed title and offers to try again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F12.S02"
+        },
+        {
+          "id": "F12.A04",
+          "from": "F12.S02",
+          "kind": "other",
+          "condition": "The widget is a checklist or link list widget with no note or counter content to edit.",
+          "steps": [
+            {
+              "id": "F12.A04.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website shows the widget with its new title; its items or links are managed in their own flows.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F12.A05",
+          "from": "F12.S03",
+          "kind": "invalid",
+          "condition": "The note text is too long.",
+          "steps": [
+            {
+              "id": "F12.A05.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website marks the note text field and keeps what was typed.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F12.S03"
+        },
+        {
+          "id": "F12.A06",
+          "from": "F12.S03",
+          "kind": "failure",
+          "condition": "Saving the note text fails.",
+          "steps": [
+            {
+              "id": "F12.A06.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website keeps the typed text and offers to try again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F12.S03"
+        },
+        {
+          "id": "F12.A07",
+          "from": "F12.S04",
+          "kind": "invalid",
+          "condition": "The counter number is not a whole number.",
+          "steps": [
+            {
+              "id": "F12.A07.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website marks the counter number field and keeps what was typed.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F12.S04"
+        },
+        {
+          "id": "F12.A08",
+          "from": "F12.S04",
+          "kind": "failure",
+          "condition": "Saving the counter changes fails.",
+          "steps": [
+            {
+              "id": "F12.A08.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website keeps the typed values and offers to try again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F12.S04"
+        }
+      ],
+      "outcome": "The widget shows the new title and content; changes persist after a refresh."
+    },
+    {
+      "id": "F13",
+      "name": "Move and resize a widget",
+      "role": "member",
+      "kind": "edit",
+      "noun": "Widget",
+      "authKind": "none",
+      "signedOut": false,
+      "start": "In the editor",
+      "goal": "Arrange widgets by moving and resizing them.",
+      "preconditions": [
+        "Signed in.",
+        "The dashboard has at least one widget."
+      ],
+      "steps": [
+        {
+          "id": "F13.S01",
+          "kind": "user",
+          "userAction": "The member moves the widget earlier or later relative to the other widgets.",
+          "websiteResponse": "The website shows the widgets in the new order, saves automatically and updates the dashboard last edited time.",
+          "fields": [],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Widget",
+              "change": "update"
+            },
+            {
+              "noun": "Dashboard",
+              "change": "update"
+            }
+          ]
+        },
+        {
+          "id": "F13.S02",
+          "kind": "user",
+          "userAction": "The member picks a new size for the widget among small, medium and large.",
+          "websiteResponse": "The website shows the widget in the new size, saves automatically and updates the dashboard last edited time.",
+          "fields": [
+            "FD06"
+          ],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Widget",
+              "change": "update"
+            },
+            {
+              "noun": "Dashboard",
+              "change": "update"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F13.A01",
+          "from": "F13.S01",
+          "kind": "notFound",
+          "condition": "The widget was deleted in the meantime.",
+          "steps": [
+            {
+              "id": "F13.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website says the widget is gone and shows the dashboard without it.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F13.A02",
+          "from": "F13.S01",
+          "kind": "failure",
+          "condition": "Saving the new order fails.",
+          "steps": [
+            {
+              "id": "F13.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website keeps the previous order and offers to try again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F13.S01"
+        },
+        {
+          "id": "F13.A03",
+          "from": "F13.S01",
+          "kind": "other",
+          "condition": "The dashboard has only this widget.",
+          "steps": [
+            {
+              "id": "F13.A03.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website shows the order unchanged and the member can still change the size.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F13.S02"
+        },
+        {
+          "id": "F13.A04",
+          "from": "F13.S02",
+          "kind": "failure",
+          "condition": "Saving the new size fails.",
+          "steps": [
+            {
+              "id": "F13.A04.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website keeps the previous size and offers to try again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F13.S02"
+        }
+      ],
+      "outcome": "The widget has its new order and size on the dashboard and keeps them after a refresh."
+    },
+    {
+      "id": "F14",
+      "name": "Remove a widget",
+      "role": "member",
+      "kind": "delete",
+      "noun": "Widget",
+      "authKind": "none",
+      "signedOut": false,
+      "start": "In the editor",
+      "goal": "Remove a widget the dashboard no longer needs.",
+      "preconditions": [
+        "Signed in.",
+        "The dashboard has at least one widget."
+      ],
+      "steps": [
+        {
+          "id": "F14.S01",
+          "kind": "user",
+          "userAction": "The member chooses to remove the widget.",
+          "websiteResponse": "The website asks the member to confirm the permanent removal.",
+          "fields": [],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Widget",
+              "change": "delete"
+            },
+            {
+              "noun": "ChecklistItem",
+              "change": "delete"
+            },
+            {
+              "noun": "Link",
+              "change": "delete"
+            },
+            {
+              "noun": "Dashboard",
+              "change": "update"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F14.A01",
+          "from": "F14.S01",
+          "kind": "confirm",
+          "condition": "The member confirmed the removal.",
+          "steps": [
+            {
+              "id": "F14.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website removes the widget with its content and shows the dashboard without it.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F14.A02",
+          "from": "F14.S01",
+          "kind": "cancel",
+          "condition": "The member cancelled.",
+          "steps": [
+            {
+              "id": "F14.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "Nothing is removed; the website shows the widget unchanged.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F14.A03",
+          "from": "F14.S01",
+          "kind": "notFound",
+          "condition": "The widget was already gone.",
+          "steps": [
+            {
+              "id": "F14.A03.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website says the widget is gone and shows the dashboard.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        }
+      ],
+      "outcome": "The widget is gone from the dashboard and stays gone after a refresh."
+    },
+    {
+      "id": "F15",
+      "name": "Increase or decrease a counter",
+      "role": "member",
+      "kind": "act",
+      "noun": "Widget",
+      "authKind": "none",
+      "signedOut": false,
+      "start": "In the editor",
+      "goal": "Track a count up or down by one.",
+      "preconditions": [
+        "Signed in.",
+        "The dashboard has at least one counter widget."
+      ],
+      "steps": [
+        {
+          "id": "F15.S01",
+          "kind": "user",
+          "userAction": "The member chooses to increase or decrease the counter.",
+          "websiteResponse": "The website shows the counter with the number changed by 1, saves automatically and updates the dashboard last edited time.",
+          "fields": [],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Widget",
+              "change": "update"
+            },
+            {
+              "noun": "Dashboard",
+              "change": "update"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F15.A01",
+          "from": "F15.S01",
+          "kind": "notFound",
+          "condition": "The counter widget was deleted in the meantime.",
+          "steps": [
+            {
+              "id": "F15.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website says the widget is gone and shows the dashboard without it.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F15.A02",
+          "from": "F15.S01",
+          "kind": "failure",
+          "condition": "Saving the new number fails.",
+          "steps": [
+            {
+              "id": "F15.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website keeps the previous number and offers to try again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F15.S01"
+        }
+      ],
+      "outcome": "The counter shows its new number; the new number persists after a refresh."
+    },
+    {
+      "id": "F16",
+      "name": "Add a checklist item",
+      "role": "member",
+      "kind": "create",
+      "noun": "ChecklistItem",
+      "authKind": "none",
+      "signedOut": false,
+      "start": "In the editor",
+      "goal": "Add something to tick off in a checklist.",
+      "preconditions": [
+        "Signed in.",
+        "The dashboard has at least one checklist widget."
+      ],
+      "steps": [
+        {
+          "id": "F16.S01",
+          "kind": "user",
+          "userAction": "The member chooses to add an item in a checklist widget.",
+          "websiteResponse": "The website shows an empty checklist item form for that checklist.",
+          "fields": [],
+          "form": "",
+          "effects": []
+        },
+        {
+          "id": "F16.S02",
+          "kind": "user",
+          "userAction": "The member fills in the item text and saves it.",
+          "websiteResponse": "The website adds the new unticked item to the end of the checklist, saves automatically and updates the dashboard's last edited time.",
+          "fields": [],
+          "form": "FM03",
+          "effects": [
+            {
+              "noun": "ChecklistItem",
+              "change": "create"
+            },
+            {
+              "noun": "Dashboard",
+              "change": "update"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F16.A01",
+          "from": "F16.S02",
+          "kind": "invalid",
+          "condition": "The item text is empty.",
+          "steps": [
+            {
+              "id": "F16.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website marks the item text as required and keeps what was typed.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F16.S02"
+        },
+        {
+          "id": "F16.A02",
+          "from": "F16.S02",
+          "kind": "failure",
+          "condition": "Saving the new item fails.",
+          "steps": [
+            {
+              "id": "F16.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website keeps the typed text and offers to try again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F16.S02"
+        },
+        {
+          "id": "F16.A03",
+          "from": "F16.S01",
+          "kind": "cancel",
+          "condition": "The member cancels adding the item.",
+          "steps": [
+            {
+              "id": "F16.A03.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "Nothing is added; the website shows the checklist unchanged.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        }
+      ],
+      "outcome": "The new unticked item is in the checklist and persists after a refresh."
+    },
+    {
+      "id": "F17",
+      "name": "Tick or edit a checklist item",
+      "role": "member",
+      "kind": "edit",
+      "noun": "ChecklistItem",
+      "authKind": "none",
+      "signedOut": false,
+      "start": "In the editor",
+      "goal": "Tick off, untick or reword a checklist item.",
+      "preconditions": [
+        "Signed in.",
+        "A checklist widget has at least one item."
+      ],
+      "steps": [
+        {
+          "id": "F17.S01",
+          "kind": "user",
+          "userAction": "The member ticks or unticks a checklist item.",
+          "websiteResponse": "The website shows the item with its new ticked state, saves automatically and updates the dashboard's last edited time.",
+          "fields": [
+            "FD11"
+          ],
+          "form": "",
+          "effects": [
+            {
+              "noun": "ChecklistItem",
+              "change": "update"
+            },
+            {
+              "noun": "Dashboard",
+              "change": "update"
+            }
+          ]
+        },
+        {
+          "id": "F17.S02",
+          "kind": "user",
+          "userAction": "The member edits the item's text and saves it.",
+          "websiteResponse": "The website shows the item with its new text, saves automatically and updates the dashboard's last edited time.",
+          "fields": [],
+          "form": "FM03",
+          "effects": [
+            {
+              "noun": "ChecklistItem",
+              "change": "update"
+            },
+            {
+              "noun": "Dashboard",
+              "change": "update"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F17.A01",
+          "from": "F17.S01",
+          "kind": "failure",
+          "condition": "Saving the new ticked state fails.",
+          "steps": [
+            {
+              "id": "F17.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website keeps the previous ticked state and offers to try again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F17.S01"
+        },
+        {
+          "id": "F17.A02",
+          "from": "F17.S02",
+          "kind": "invalid",
+          "condition": "The item text is empty.",
+          "steps": [
+            {
+              "id": "F17.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website marks the item text as required and keeps what was typed.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F17.S02"
+        },
+        {
+          "id": "F17.A03",
+          "from": "F17.S02",
+          "kind": "failure",
+          "condition": "Saving the edited text fails.",
+          "steps": [
+            {
+              "id": "F17.A03.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website keeps the typed text and offers to try again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F17.S02"
+        },
+        {
+          "id": "F17.A04",
+          "from": "F17.S01",
+          "kind": "notFound",
+          "condition": "The item is already gone.",
+          "steps": [
+            {
+              "id": "F17.A04.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website says the item is gone and shows the dashboard with the remaining items.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        }
+      ],
+      "outcome": "The item shows its new text and ticked state; changes persist after a refresh."
+    },
+    {
+      "id": "F18",
+      "name": "Remove a checklist item",
+      "role": "member",
+      "kind": "delete",
+      "noun": "ChecklistItem",
+      "authKind": "none",
+      "signedOut": false,
+      "start": "In the editor",
+      "goal": "Remove a checklist item no longer needed.",
+      "preconditions": [
+        "Signed in.",
+        "A checklist widget has at least one item."
+      ],
+      "steps": [
+        {
+          "id": "F18.S01",
+          "kind": "user",
+          "userAction": "The member chooses to remove a checklist item.",
+          "websiteResponse": "The website asks the member to confirm the permanent removal.",
+          "fields": [],
+          "form": "",
+          "effects": [
+            {
+              "noun": "ChecklistItem",
+              "change": "delete"
+            },
+            {
+              "noun": "Dashboard",
+              "change": "update"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F18.A01",
+          "from": "F18.S01",
+          "kind": "confirm",
+          "condition": "The member confirms the removal.",
+          "steps": [
+            {
+              "id": "F18.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website shows the checklist without the item, saves automatically and updates the dashboard's last edited time.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F18.A02",
+          "from": "F18.S01",
+          "kind": "cancel",
+          "condition": "The member cancels the removal.",
+          "steps": [
+            {
+              "id": "F18.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "Nothing is removed; the website shows the checklist unchanged.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F18.A03",
+          "from": "F18.S01",
+          "kind": "notFound",
+          "condition": "The item is already gone.",
+          "steps": [
+            {
+              "id": "F18.A03.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website says the item is gone and shows the dashboard with the remaining items.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        }
+      ],
+      "outcome": "The item is gone from the checklist and stays gone after a refresh."
+    },
+    {
+      "id": "F19",
+      "name": "Add a link",
+      "role": "member",
+      "kind": "create",
+      "noun": "Link",
+      "authKind": "none",
+      "signedOut": false,
+      "start": "In the editor",
+      "goal": "Save a useful title and web address in a link list.",
+      "preconditions": [
+        "Signed in.",
+        "The dashboard has at least one link list widget."
+      ],
+      "steps": [
+        {
+          "id": "F19.S01",
+          "kind": "user",
+          "userAction": "The member chooses to add a link in a link list widget.",
+          "websiteResponse": "The website shows the existing links in that link list and an empty link form.",
+          "fields": [],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Link",
+              "change": "list"
+            }
+          ]
+        },
+        {
+          "id": "F19.S02",
+          "kind": "user",
+          "userAction": "The member fills in the title and web address and saves the link.",
+          "websiteResponse": "The website adds the link to the end of the link list, saves automatically and updates the dashboard's last edited time.",
+          "fields": [],
+          "form": "FM04",
+          "effects": [
+            {
+              "noun": "Link",
+              "change": "create"
+            },
+            {
+              "noun": "Dashboard",
+              "change": "update"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F19.A01",
+          "from": "F19.S01",
+          "kind": "empty",
+          "condition": "The link list has no links yet.",
+          "steps": [
+            {
+              "id": "F19.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website shows the link list as empty with guidance to add a first link and keeps the empty link form available.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F19.S02"
+        },
+        {
+          "id": "F19.A02",
+          "from": "F19.S02",
+          "kind": "invalid",
+          "condition": "The title is empty or the web address is not a valid web address.",
+          "steps": [
+            {
+              "id": "F19.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website marks what is wrong, keeps what was typed and offers to correct it.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F19.S02"
+        },
+        {
+          "id": "F19.A03",
+          "from": "F19.S02",
+          "kind": "failure",
+          "condition": "Saving the link fails.",
+          "steps": [
+            {
+              "id": "F19.A03.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website keeps the typed title and web address and offers to try again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F19.S02"
+        },
+        {
+          "id": "F19.A04",
+          "from": "F19.S01",
+          "kind": "cancel",
+          "condition": "The member cancels adding the link.",
+          "steps": [
+            {
+              "id": "F19.A04.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "Nothing is saved; the website shows the link list as it was.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        }
+      ],
+      "outcome": "The new link is in the link list and persists after a refresh."
+    },
+    {
+      "id": "F20",
+      "name": "Edit a link",
+      "role": "member",
+      "kind": "edit",
+      "noun": "Link",
+      "authKind": "none",
+      "signedOut": false,
+      "start": "In the editor",
+      "goal": "Correct a link's title or address.",
+      "preconditions": [
+        "Signed in.",
+        "A link list widget has at least one link."
+      ],
+      "steps": [
+        {
+          "id": "F20.S01",
+          "kind": "user",
+          "userAction": "The member chooses to edit a link in the link list widget.",
+          "websiteResponse": "The website shows the link form filled with the link's current title and web address.",
+          "fields": [],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Link",
+              "change": "read"
+            }
+          ]
+        },
+        {
+          "id": "F20.S02",
+          "kind": "user",
+          "userAction": "The member changes the title or web address and saves.",
+          "websiteResponse": "The website shows the link list with the updated link, saves automatically and updates the dashboard's last edited time.",
+          "fields": [],
+          "form": "FM04",
+          "effects": [
+            {
+              "noun": "Link",
+              "change": "update"
+            },
+            {
+              "noun": "Dashboard",
+              "change": "update"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F20.A01",
+          "from": "F20.S01",
+          "kind": "notFound",
+          "condition": "The link was removed in the meantime.",
+          "steps": [
+            {
+              "id": "F20.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website says the link is gone and shows the link list without it.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F20.A02",
+          "from": "F20.S02",
+          "kind": "invalid",
+          "condition": "The title is empty or the web address is not a valid web address.",
+          "steps": [
+            {
+              "id": "F20.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website marks what is wrong, keeps what was typed and offers to correct it.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F20.S02"
+        },
+        {
+          "id": "F20.A03",
+          "from": "F20.S02",
+          "kind": "failure",
+          "condition": "Saving the changes fails.",
+          "steps": [
+            {
+              "id": "F20.A03.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website keeps the typed title and web address and offers to try again.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": "F20.S02"
+        },
+        {
+          "id": "F20.A04",
+          "from": "F20.S02",
+          "kind": "cancel",
+          "condition": "The member cancels without saving.",
+          "steps": [
+            {
+              "id": "F20.A04.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "Nothing is changed; the website shows the link list with the link as it was.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        }
+      ],
+      "outcome": "The link shows its new title and address; changes persist after a refresh."
+    },
+    {
+      "id": "F21",
+      "name": "Remove a link",
+      "role": "member",
+      "kind": "delete",
+      "noun": "Link",
+      "authKind": "none",
+      "signedOut": false,
+      "start": "In the editor",
+      "goal": "Remove a link no longer needed.",
+      "preconditions": [
+        "Signed in.",
+        "A link list widget has at least one link."
+      ],
+      "steps": [
+        {
+          "id": "F21.S01",
+          "kind": "user",
+          "userAction": "The member chooses to remove a link from the link list widget.",
+          "websiteResponse": "The website asks the member to confirm the permanent removal of the link.",
+          "fields": [],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Link",
+              "change": "delete"
+            },
+            {
+              "noun": "Dashboard",
+              "change": "update"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F21.A01",
+          "from": "F21.S01",
+          "kind": "confirm",
+          "condition": "The member confirms the removal.",
+          "steps": [
+            {
+              "id": "F21.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website removes the link from the link list, saves automatically and updates the dashboard's last edited time.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F21.A02",
+          "from": "F21.S01",
+          "kind": "cancel",
+          "condition": "The member cancels.",
+          "steps": [
+            {
+              "id": "F21.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "Nothing is removed; the website shows the link list unchanged.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F21.A03",
+          "from": "F21.S01",
+          "kind": "notFound",
+          "condition": "The link is already gone.",
+          "steps": [
+            {
+              "id": "F21.A03.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website says the link is gone and shows the link list without it.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        }
+      ],
+      "outcome": "The link is gone from the link list and stays gone after a refresh."
+    },
+    {
+      "id": "F22",
+      "name": "Open a link",
+      "role": "member",
+      "kind": "act",
+      "noun": "Link",
+      "authKind": "none",
+      "signedOut": false,
+      "start": "In the editor",
+      "goal": "Open a saved web address from the dashboard.",
+      "preconditions": [
+        "Signed in.",
+        "A link list widget has at least one link."
+      ],
+      "steps": [
+        {
+          "id": "F22.S01",
+          "kind": "user",
+          "userAction": "The member chooses to open a link in the link list widget.",
+          "websiteResponse": "The website opens the link's web address for viewing while the dashboard stays as it was.",
+          "fields": [],
+          "form": "",
+          "effects": [
+            {
+              "noun": "Link",
+              "change": "read"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "id": "F22.A01",
+          "from": "F22.S01",
+          "kind": "notFound",
+          "condition": "The link was removed in the meantime.",
+          "steps": [
+            {
+              "id": "F22.A01.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website says the link is gone and shows the link list without it.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        },
+        {
+          "id": "F22.A02",
+          "from": "F22.S01",
+          "kind": "failure",
+          "condition": "Opening the web address fails.",
+          "steps": [
+            {
+              "id": "F22.A02.S01",
+              "kind": "system",
+              "userAction": "",
+              "websiteResponse": "The website says the address could not be opened, keeps the dashboard shown and offers to try again or edit the link.",
+              "fields": [],
+              "form": ""
+            }
+          ],
+          "resumesAt": ""
+        }
+      ],
+      "outcome": "The web address is opened for the member; the dashboard and its links are unchanged after a refresh."
+    }
+  ],
+  "fields": [
+    {
+      "id": "FD01",
+      "noun": "",
+      "label": "Email",
+      "meaning": "How the member signs in and is identified",
+      "type": "email",
+      "required": true,
+      "min": null,
+      "max": 254,
+      "options": [],
+      "optionsFrom": "",
+      "example": "sam@example.com"
+    },
+    {
+      "id": "FD02",
+      "noun": "",
+      "label": "Password",
+      "meaning": "The secret that protects the member's dashboards",
+      "type": "password",
+      "required": true,
+      "min": 8,
+      "max": 128,
+      "options": [],
+      "optionsFrom": "",
+      "example": "correct-horse-battery"
+    },
+    {
+      "id": "FD03",
+      "noun": "Dashboard",
+      "label": "Dashboard name",
+      "meaning": "How the member refers to the dashboard in the list and editor",
+      "type": "text",
+      "required": true,
+      "min": 1,
+      "max": 120,
+      "options": [],
+      "optionsFrom": "",
+      "example": "Morning routine"
+    },
+    {
+      "id": "FD04",
+      "noun": "Widget",
+      "label": "Widget type",
+      "meaning": "Which kind of widget to add to the dashboard",
+      "type": "singleChoice",
+      "required": true,
+      "min": null,
+      "max": null,
+      "options": [
+        "note",
+        "counter",
+        "checklist",
+        "link list"
+      ],
+      "optionsFrom": "",
+      "example": "counter"
+    },
+    {
+      "id": "FD05",
+      "noun": "Widget",
+      "label": "Widget title",
+      "meaning": "How the member refers to the widget on the dashboard",
+      "type": "text",
+      "required": true,
+      "min": 1,
+      "max": 120,
+      "options": [],
+      "optionsFrom": "",
+      "example": "Water intake"
+    },
+    {
+      "id": "FD06",
+      "noun": "Widget",
+      "label": "Widget size",
+      "meaning": "How much space the widget takes: small, medium or large only",
+      "type": "singleChoice",
+      "required": true,
+      "min": null,
+      "max": null,
+      "options": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "optionsFrom": "",
+      "example": "medium"
+    },
+    {
+      "id": "FD07",
+      "noun": "Widget",
+      "label": "Note text",
+      "meaning": "The plain text kept in a note widget",
+      "type": "longText",
+      "required": false,
+      "min": null,
+      "max": 5000,
+      "options": [],
+      "optionsFrom": "",
+      "example": "Call the dentist at noon."
+    },
+    {
+      "id": "FD08",
+      "noun": "Widget",
+      "label": "Counter label",
+      "meaning": "What the counter number counts",
+      "type": "text",
+      "required": false,
+      "min": null,
+      "max": 120,
+      "options": [],
+      "optionsFrom": "",
+      "example": "Glasses of water"
+    },
+    {
+      "id": "FD09",
+      "noun": "Widget",
+      "label": "Counter number",
+      "meaning": "The current count; changed by 1 per increase or decrease with no minimum or maximum",
+      "type": "integer",
+      "required": true,
+      "min": null,
+      "max": null,
+      "options": [],
+      "optionsFrom": "",
+      "example": "3"
+    },
+    {
+      "id": "FD10",
+      "noun": "ChecklistItem",
+      "label": "Item text",
+      "meaning": "What one checklist item says",
+      "type": "text",
+      "required": true,
+      "min": 1,
+      "max": 200,
+      "options": [],
+      "optionsFrom": "",
+      "example": "Buy oat milk"
+    },
+    {
+      "id": "FD11",
+      "noun": "ChecklistItem",
+      "label": "Ticked off",
+      "meaning": "Whether the checklist item is ticked off or still open",
+      "type": "boolean",
+      "required": true,
+      "min": null,
+      "max": null,
+      "options": [],
+      "optionsFrom": "",
+      "example": "no"
+    },
+    {
+      "id": "FD12",
+      "noun": "Link",
+      "label": "Link title",
+      "meaning": "How the link is named in the link list",
+      "type": "text",
+      "required": true,
+      "min": 1,
+      "max": 200,
+      "options": [],
+      "optionsFrom": "",
+      "example": "MDN Web Docs"
+    },
+    {
+      "id": "FD13",
+      "noun": "Link",
+      "label": "Web address",
+      "meaning": "Where the link opens when the member opens it",
+      "type": "url",
+      "required": true,
+      "min": null,
+      "max": 2000,
+      "options": [],
+      "optionsFrom": "",
+      "example": "https://developer.mozilla.org/"
+    }
+  ],
+  "forms": [
+    {
+      "id": "FM01",
+      "name": "Auth form",
+      "fields": [
+        "FD01",
+        "FD02"
+      ]
+    },
+    {
+      "id": "FM03",
+      "name": "Checklist item form",
+      "fields": [
+        "FD10"
+      ]
+    },
+    {
+      "id": "FM04",
+      "name": "Link form",
+      "fields": [
+        "FD12",
+        "FD13"
+      ]
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "A10",
+      "text": "The dashboard list shows every dashboard's name and last edited time ordered most-recently-edited first, so the user can find recent work without search or filters.",
+      "kind": "behavior",
+      "affects": [
+        "Dashboard"
+      ]
+    },
+    {
+      "id": "A11",
+      "text": "Using a dashboard in the editor — increasing or decreasing a counter, ticking or unticking a checklist item — saves automatically like any other edit and updates the dashboard's last edited time; opening a link does not change the dashboard or its last edited time.",
+      "kind": "behavior",
+      "affects": [
+        "Widget",
+        "ChecklistItem",
+        "Link"
+      ]
+    }
+  ],
+  "questions": []
+}

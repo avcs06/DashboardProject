@@ -1,0 +1,400 @@
+{
+  "brief": {
+    "audience": "Individuals who want one private, personal place for their own notes, counters, checklists and useful links, visited often to quickly check and update small everyday things.",
+    "personality": [
+      "bold",
+      "electric",
+      "focused",
+      "theatrical"
+    ],
+    "voice": "plain, energised, second person",
+    "density": "comfortable",
+    "signature": "A faint neon grid behind every page, and glowing teal figures in the mono font",
+    "feel": [
+      "neon",
+      "squared"
+    ],
+    "colorScheme": "dark",
+    "seedHue": 195,
+    "seedChroma": "vivid",
+    "frameHue": 266,
+    "frameChroma": "balanced",
+    "baseHue": 195,
+    "baseChroma": "muted",
+    "statusHues": {
+      "success": 164,
+      "warning": 84,
+      "error": 29,
+      "info": 246
+    },
+    "fonts": {
+      "ui": [
+        {
+          "family": "Exo 2",
+          "reason": "Techy but readable sans with organic forms, futuristic without sacrificing widget text legibility."
+        },
+        {
+          "family": "Titillium Web",
+          "reason": "Squarish semi-technical sans from Italy that suits a squared console interface and everyday UI text."
+        },
+        {
+          "family": "Manrope",
+          "reason": "Clean modern geometric-grotesque that keeps forms and lists calm and highly readable."
+        }
+      ],
+      "display": [
+        {
+          "family": "Orbitron",
+          "reason": "Squared sci-fi letterforms give page titles the spaceship-console character the brief asks for."
+        },
+        {
+          "family": "Space Grotesk",
+          "reason": "Quirky techy grotesque that feels futuristic while staying calmer than Orbitron at smaller heading sizes."
+        },
+        {
+          "family": "Chakra Petch",
+          "reason": "Squared Thai-Latin sans with a technical console feel that suits headings and labels."
+        }
+      ],
+      "mono": [
+        {
+          "family": "Space Mono",
+          "reason": "Retro-futurist computer type that makes counter figures, counts and timestamps glow like terminal readouts."
+        },
+        {
+          "family": "JetBrains Mono",
+          "reason": "Tall, clear monospace with even figures for counters, ids and last-edited times."
+        },
+        {
+          "family": "IBM Plex Mono",
+          "reason": "Engineered monospace that keeps figures aligned and legible in dense widget data."
+        }
+      ]
+    },
+    "radius": "sharp",
+    "focusRing": "glow",
+    "entities": [
+      {
+        "noun": "Dashboard",
+        "colored": false,
+        "hue": 0
+      },
+      {
+        "noun": "Widget",
+        "colored": false,
+        "hue": 0
+      },
+      {
+        "noun": "ChecklistItem",
+        "colored": false,
+        "hue": 0
+      },
+      {
+        "noun": "Link",
+        "colored": false,
+        "hue": 0
+      }
+    ],
+    "imagery": "icons",
+    "references": []
+  },
+  "theme": {
+    "modes": [
+      "dark"
+    ],
+    "colors": {
+      "dark": {
+        "theme": {
+          "bg": "#001B1B",
+          "fg": "#B2FFFE",
+          "fgMuted": "#00A7A7",
+          "border": "#007F7F",
+          "hoverBg": "#002828",
+          "accentBg": "#00A7A7",
+          "accentFg": "#021313",
+          "accentBorder": "#00B8B9",
+          "accentHoverBg": "#00B8B9",
+          "focus": "#00A7A7",
+          "accentFocus": "#B2FFFE",
+          "shadow": "#021313"
+        },
+        "base": {
+          "bg": "#0E1818",
+          "fg": "#D8F5F5",
+          "fgMuted": "#659E9E",
+          "border": "#4A7878",
+          "hoverBg": "#152525",
+          "accentBg": "#A1CECE",
+          "accentFg": "#0B1111",
+          "accentBorder": "#A1CECE",
+          "accentHoverBg": "#D8F5F5",
+          "focus": "#659E9E",
+          "accentFocus": "#D8F5F5",
+          "shadow": "#0B1111"
+        },
+        "page": {
+          "pageBg": "#0E1818",
+          "pageFg": "#D8F5F5",
+          "pageFgMuted": "#659E9E",
+          "frameBg": "#101624",
+          "divider": "#1B302F",
+          "backdrop": "#0B1111",
+          "skeleton": "#152525",
+          "pageBackground": "repeating-linear-gradient(0deg, #0c1d26 0px, #0c1d26 1px, #060e14 1px, #060e14 32px), repeating-linear-gradient(90deg, #0c1d26 0px, #0c1d26 1px, #060e14 1px, #060e14 32px)"
+        },
+        "entity": {},
+        "status": {
+          "success": {
+            "bg": "#001C11",
+            "fg": "#C1FFE1",
+            "fgMuted": "#00AC7B",
+            "border": "#00835C",
+            "hoverBg": "#00291B",
+            "accentBg": "#00AC7B",
+            "accentFg": "#05130C",
+            "accentBorder": "#00AC7B",
+            "accentHoverBg": "#00BE88",
+            "focus": "#00AC7B",
+            "accentFocus": "#C1FFE1",
+            "shadow": "#05130C"
+          },
+          "warning": {
+            "bg": "#1F1400",
+            "fg": "#FFECC8",
+            "fgMuted": "#B98A00",
+            "border": "#8D6800",
+            "hoverBg": "#2D1F00",
+            "accentBg": "#B98A00",
+            "accentFg": "#150E03",
+            "accentBorder": "#B98A00",
+            "accentHoverBg": "#CC9800",
+            "focus": "#B98A00",
+            "accentFocus": "#FFECC8",
+            "shadow": "#150E03"
+          },
+          "error": {
+            "bg": "#260E0A",
+            "fg": "#FFE9E5",
+            "fgMuted": "#E86152",
+            "border": "#B3463A",
+            "hoverBg": "#391510",
+            "accentBg": "#E86152",
+            "accentFg": "#190B09",
+            "accentBorder": "#E86152",
+            "accentHoverBg": "#F97161",
+            "focus": "#E86152",
+            "accentFocus": "#FFE9E5",
+            "shadow": "#190B09"
+          },
+          "info": {
+            "bg": "#041728",
+            "fg": "#E1F1FF",
+            "fgMuted": "#0098F2",
+            "border": "#0073BA",
+            "hoverBg": "#03233C",
+            "accentBg": "#0098F2",
+            "accentFg": "#06101A",
+            "accentBorder": "#0098F2",
+            "accentHoverBg": "#35A8FF",
+            "focus": "#0098F2",
+            "accentFocus": "#E1F1FF",
+            "shadow": "#06101A"
+          }
+        }
+      }
+    },
+    "fonts": {
+      "ui": "Exo 2",
+      "display": "Orbitron",
+      "mono": "Space Mono"
+    },
+    "radius": {
+      "surface": "4px",
+      "control": "4px"
+    },
+    "focusRing": "glow",
+    "logo": {
+      "family": "Orbitron",
+      "weight": "700",
+      "case": "upper",
+      "letterSpacing": "0.06em",
+      "colors": {
+        "dark": "#00A7A7"
+      }
+    },
+    "layouts": {
+      "app": {
+        "docksFirst": "sidebars",
+        "header": {
+          "needed": false,
+          "start": "",
+          "center": "",
+          "end": "",
+          "separation": "none",
+          "overlay": false,
+          "sticky": false
+        },
+        "sidebar": {
+          "needed": true,
+          "side": "left",
+          "top": "logo, Create button",
+          "items": "navigation, dashboard list",
+          "bottom": "account",
+          "widthPx": 264,
+          "separation": "divider"
+        },
+        "footer": {
+          "needed": false,
+          "start": "",
+          "center": "",
+          "end": "",
+          "padding": "4",
+          "gap": "4",
+          "separation": "none"
+        },
+        "main": {
+          "container": "fluid",
+          "maxWidthPx": 0,
+          "padding": "6",
+          "align": "start",
+          "separation": "none"
+        },
+        "logo": "sidebar",
+        "account": "sidebar"
+      },
+      "marketing": {
+        "docksFirst": "header",
+        "header": {
+          "needed": true,
+          "start": "logo",
+          "center": "navigation",
+          "end": "account",
+          "separation": "none",
+          "overlay": true,
+          "sticky": true
+        },
+        "sidebar": {
+          "needed": false,
+          "side": "left",
+          "top": "",
+          "items": "",
+          "bottom": "",
+          "widthPx": 0,
+          "separation": "none"
+        },
+        "footer": {
+          "needed": true,
+          "content": "Site links in columns, then a line of small print",
+          "padding": "6",
+          "gap": "4",
+          "separation": "divider"
+        },
+        "main": {
+          "container": "fixed",
+          "maxWidthPx": 1120,
+          "padding": "9",
+          "align": "center",
+          "separation": "none"
+        },
+        "logo": "header",
+        "account": "header"
+      }
+    },
+    "defaults": {
+      "Textarea": {
+        "look": "outline"
+      },
+      "Tag": {
+        "variant": "base",
+        "size": "sm",
+        "look": "bordered"
+      },
+      "Tabs": {
+        "variant": "default"
+      },
+      "Switch": {
+        "variant": "default",
+        "size": "sm"
+      },
+      "MultiSelect": {
+        "look": "outline"
+      },
+      "Select": {
+        "look": "outline"
+      },
+      "Radio": {
+        "variant": "default",
+        "size": "sm"
+      },
+      "PopoverButton": {
+        "look": "ghost"
+      },
+      "Link": {
+        "variant": "default",
+        "look": ""
+      },
+      "Input": {
+        "look": "outline"
+      },
+      "DateInput": {
+        "look": "outline"
+      },
+      "NumberInput": {
+        "look": "outline"
+      },
+      "PasswordInput": {
+        "look": "outline"
+      },
+      "QuantitySelector": {
+        "look": "outline"
+      },
+      "SearchInput": {
+        "look": "outline"
+      },
+      "FormControl": {
+        "variant": "default",
+        "size": "md",
+        "look": "outline"
+      },
+      "Dialog": {
+        "size": "md"
+      },
+      "Chip": {
+        "variant": "default",
+        "size": "sm",
+        "look": "outline"
+      },
+      "ChipGroup": {
+        "look": "collapsed"
+      },
+      "Checkbox": {
+        "variant": "default",
+        "size": "sm"
+      },
+      "Card": {
+        "variant": "default",
+        "look": "outline"
+      },
+      "Button": {
+        "variant": "default",
+        "size": "md",
+        "look": "ghost"
+      },
+      "IconButton": {
+        "look": "ghost"
+      },
+      "Avatar": {
+        "size": "md"
+      },
+      "Accordion": {
+        "look": "bordered"
+      },
+      "Collapsible": {
+        "look": "bordered"
+      },
+      "Toast": {
+        "status": "info"
+      }
+    }
+  }
+}

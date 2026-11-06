@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .weave/hooks/validate-edit.mjs"
+          }
+        ]
+      }
+    ]
+  }
+}

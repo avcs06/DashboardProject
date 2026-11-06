@@ -1,0 +1,23 @@
+{
+  "questions": [
+    {
+      "id": "Q01",
+      "question": "Can a dashboard ever be shared with, or viewed by, anyone other than the user who created it?",
+      "answer": "No. Dashboards are private to their owner, with no sharing, inviting or public pages in the MVP.",
+      "from": "scope"
+    },
+    {
+      "id": "Q02",
+      "question": "May a counter widget's number go below zero, and is there any largest or smallest value?",
+      "answer": "Yes. The counter changes by 1 per increase or decrease with no minimum or maximum, starting from 0.",
+      "from": "scope"
+    },
+    {
+      "id": "Q03",
+      "question": "Is deleting a dashboard or removing a widget permanent, or should deleted items be recoverable?",
+      "answer": "Deletion is permanent after a confirmation step, for both dashboards and widgets, with no trash, undo or restore.",
+      "from": "scope"
+    }
+  ],
+  "known": []
+}
